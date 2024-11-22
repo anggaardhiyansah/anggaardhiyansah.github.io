@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            h1 {text-align: center;}
+            img {text-align: center;height: 60%;width: 70%;}
+            h2 {font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;};
+
+        </style>
+    </head>
+    <body>
+        <title>MIKROTIK</title>
+        <h1>TUTORIAL MIKROTIK DENGAN VirtualBox</h1>
+        <br><br>
+        <h2>Konfigurasi yang di pelajari:<br>
+            1.	Install Mikrotik<br>
+            2.	Konfigurasi Dasar Mikrotik<br>
+            3.	Block Extension (.mp3|.mp4)<br>
+            4.	Block Situs (http & https)<br>
+            5.	Timer (Schedule)</h2>
+
+            <h2>Pertama buka VirtualBox dan buat Virtual Machine dan beri nama yang mengandung kata <br>
+                mikrotik. Setelah kalian buat Virtual Machine kalian ke setting lalu insert file Iso Mikrotik ke <br>
+                dalam Storage pada settings.<br><br>
+            
+                Setelah itu kalian buka Network dan kalian ubah dari NAT ke Bridged Adapter pada Adaptor 1. <br>
+                Dan pada Adaptor 2 kalian ubah NAT > Internal Network. (opsional jika kalian ingin mengganti <br>
+                nama adapter) <br></h2>
+
+                <img src="img/(41).png">
+                <img src="img/(42).png"><br>
+
+                <h2>Selanjutnya Kalian Start untuk menginstall mikrotik tersebut. Jika sudah sampai bagian Router <br>
+                    Software Instalation kalian klik huruf ”a” pada keyboard kalian agar semua settingan pada <br>
+                    mikrotik dapat terinstall<br></h2>
+                     
+                    <img src="img/(43).png"><br>
+
+                    <h2>Setelah itu klik huruf  ”i > n > y”<br></h2>
+
+                    <img src="img/(44).png"><br>
+
+                    <h2>Setelah terinstall, sebelum kalian klik Enter, kalian lepas iso mikrotik agar kalian tidak <br>
+                        mengulang penginstallanya kembali<br></h2>
+
+                        <img src="img/(45).png"><br>
+
+                        <h2>Login terlebih dahulu dengan user ”Admin” dengan password (kosong)<br></h2>
+
+                        <img src="img/(46).png"><br>
+
+                        <h2>Jika sudah login, saat see software license kalian klik n > enter<br></h2>
+
+                        <img src="img/(47).png"><br>
+
+                        <h2>Setelah itu kalian buka winbox pada laptopkalian dan login menggunakan Mac Address karena <br>
+                            dhcp client mikrotik kalian belum terhubung jadi belum bisa login menggunakan IP<br></h2>
+
+                        <img src="img/(51).png"><br>
+
+                        <h2>Setelah connect ke dalam mikrotik, hal pertama yang harus kalian lakukan adalah konfigurasi <br>
+                            dasar mikrotik agar mendapat internet. Tambahkan DHCP Client pada menu IP > dhcp client<br></h2>
+
+                            <img src="img/(52).png"><br>
+
+                            <h2>Setelah itu kalian klik ”+” untuk menambahkan dhcp client dan klik Apply > ok. Setelah <br>
+                                menambah dhcp client kita skrng mendapatkan ip dari wifi laptop kita.<br></h2>
+
+                                <img src="img/(53).png"><br>
+
+                                <h2>Dengan begini kita sudah bisa masuk mikrotik dengan menggunakan IP<br></h2>
+
+                                <img src="img/(54).png"><br>
+
+                                <h2>Lalu setelah menambahkan dhcp client, kita akan membuat IP pada Addresses untuk port adapter <br>
+                                    ke 2 pada mikrotik pada menu ip > addresses. Dan klik ”+” unutk menambah Address. Isi <br>
+                                    address sesuai keinginan kalian dan jangan lupa untuk menambahkan (/24). Disini saya <br>
+                                    menggunakan ip 10.10.10.1/24 dengan interface ether2 lalu klik Apply > OK <br></h2>
+
+                                    <img src="img/(56).png">
+                                    <img src="img/(57).png"><br>
+
+                                    <h2>Lalu setelah dari addresses kita akan menambahkan server pada setiap adapter di mikrotik pada <br>
+                                        menu ip > dhcp server. Pada dhcp server kita menambahkan server dengan ”DHCP Setup” dan <br>
+                                        hanya klik ” next” hingga selesai. Lakukan kembali hingga kedua adapter mendapat dhcp server<br></h2>
+
+                                        <img src="img/(58).png">
+                                        <img src="img/(59).png"><br>
+
+                                        <h2>Selanjutnya kita akan menambahkan NAT pada menu ip > firewall > NAT<br></h2>
+
+                                        <img src="img/(60).png"><br>
+
+                                        <h2>Klik ”+”, pada General isi Chain dengan ”srcnat”, dan Out. Interface dengan ether1(sumber <br>
+                                            internet). Pada menu Action ubah ke ”masquerade”, Apply > OK<br></h2>
+
+                                            <img src="img/(61).png">
+                                            <img src="img/(62).png"><br>
+
+                                            <h2>Lalu setelah dari NAT kita akan menambahkan server DNS pada menu ip > dns. Tambahkan <br>
+                                                8.8.8.8 pada server dan aktifkan Allow Remote Request, Apply > OK<br></h2>
+
+                                                <img src="img/(64).png"><br>
+
+                                                <h2>Selanjutnya untuk mendapatkan internet kita akan menambahkan gateaway pada Routes pada <br>
+                                                    menu ip > Routes. Tambahkan ip gateaway sesuai dengan ip ether1, Apply > OK<br></h2>
+
+                                                    <img src="img/(65).png">
+                                                    <img src="img/(66).png"><br>
+
+                                                    <h2>Setelah konfigurasi di atas seharusnya ether2 kita sudah mendapatkan internet. Sebelum kita <br>
+                                                        mengaktifkan windows pada virtualbox, kita hubungkan terlebih dahulu adapter2/ether2 pada <br>
+                                                        mikrotik ke dalam windows tersebut. Buka Setting > Network windows pada virtualbox, lalu <br>
+                                                        ubah NAT > menjadi “Internal Network”. Ganti “intnet” ke nama adapter2 pada mikrotik kalian <br>
+                                                        agar windows kalian terhubung dengan mikrotik. Pada Advenced ubah deny > Allow all<br></h2>
+
+                                                        <img src="img/(67).png"><br>
+
+                                                        <h2>Lalu kalian bisa start windows pada virtual box Coba buka menu network and internet dan coba <br>
+                                                            cek network2 apakah sudah mendapatkan ip dari adapter2 pada mikrotik. Usahakan IpV4 kalian <br>
+                                                            Otomatic, jangan Static IP<br></h2>
+
+                                                            <img src="img/(68).png"><br>
+
+                                                            <h2>Sekarang mari kita coba ping pada cmd di windows. Masuk ke menu run dengan klik <br>
+                                                                Windows+R, ketik cmd dan enter. Lalu coba ping dns server (8.8.8.8) dan ip (10.10.10.1). Jika <br>
+                                                                berhasil maka windows kalian sudah mendapat internet<br></h2>
+
+                                                                <img src="img/(69).png"><br>
+
+                                                                <h2>Untuk membuktikan apakah windows sudah benar benar mendapatkan internet kita coba buka <br>
+                                                                    Internet Explorer dan coba search sesuatu. wkwkwk mesti KAYU :)<br></h2>
+
+                                                                    <img src="img/(70).png"><br><br><br>
+
+                                                                    <h2>Selanjutnya kita akan coba untuk memblokir beberapa situs http dan beberapa extensi file seperti <br>
+                                                                        mp3 dan mp4.<br><br>
+                                                                        Pertama kita buka ”Web Proxy” pada menu ip > web proxy. Aktifkan centang pada ”enabled” <br>
+                                                                        dan ”cache on disk”. Untuk cache administrator bebas kalian bisa tulis terserah kalian. Jika sudah <br>
+                                                                        jangan lupa untuk ”Apply”. Sebelum kita ”OK” kita akan masuk ke dalam menu ”Access”<br></h2>
+
+                                                                        <img src="img/(71).png"><br>
+
+                                                                        <h2>Di dalam menu Access kita akan menambah situs dan extensi yang akan kita block. Klik ”+”, <br>
+                                                                            lalu isi ”Dst. Port” dengan ”80” dan ”Dst. Host” isi sesuai dengan situs yang akan kalian block, <br>
+                                                                            ubah juga action menjadi Deny. Jika sudah Apply > OK<br></h2>
+
+                                                                            <img src="img/(72).png"><br>
+
+                                                                            <h2>Untuk memblockir suatu extensi sama halnya dengan block situs, bedanya hanya terletak pada <br>
+                                                                                tempat untuk menuliskannya. Jika pada Dst. Host di gunakan untuk memblock suatu situs, maka <br>
+                                                                                untuk suatu extensi kita akan menuliskannya pada ”Path” dengan catatan diberi tanda bintang (*) <br>
+                                                                                sebelum menuliskan extensi yang akan di block<br></h2>
+
+                                                                                <img src="img/(73).png">
+                                                                                <img src="img/(74).png"><br>
+
+                                                                                <h2>Selanjutnya agar block situs dan extensi berhasil kita perlu menambahkan NAT baru untuk port <br>
+                                                                                    pada Web Proxy. Buka ip > firewall > NAT > ”+”. Ubah chain ke ”dstnat” dan tambahkan <br>
+                                                                                    protocol 6 (tcp), lalu isi Dst. Port dengan 80,8080,8000. Jika sudah masuk ke menu action lalu <br>
+                                                                                    ubah menjadi ”redirect” dan tambahkan tujuan port ke port web proxy 8080<br></h2>
+
+                                                                                    <img src="img/(75).png">
+                                                                                    <img src="img/(76).png"><br>
+
+                                                                                    <h2>Sekarang kita akan coba hasil dari block extensi dan situs. Pertama buka windows dan buka <br>
+                                                                                        internet explorer. Untuk extensi mp3 kalian bisa search ”mp3 of index” lalu cari web yang <br>
+                                                                                        menyediakan file .mp3 sama halnya dgn .mp4.<br></h2>
+
+                                                                                        <img src="img/(77).png">
+                                                                                        <img src="img/(78).png"><br>
+
+                                                                                        <h2>Jika berhasil maka akan seperti ini.<br></h2>
+
+                                                                                        <img src="img/(79).png">
+                                                                                        <h2>Situs</h2>
+                                                                                        <img src="img/(80).png"><br>
+
+                                                                                        <h2>Block situs di atas hanya untuk situs http, sedangkan jika ingin block situs https kita akan <br>
+                                                                                            menggunakan Layer 7 Protocol. Buka IP > firewall > layer 7 protocol > +<br></h2>
+
+                                                                                            <img src="img/(81).png"><br>
+
+                                                                                            <h2>Beri nama terserah kalian lalu isi Regexp dengan<br>
+                                                                                            <br> ^.*(youtube.com)*.$ <br>
+                                                                                        <br> Jika ada web lain kalian tinggal menambahkannya saja ke dalam kolom tersebut. Tekan Apply > OK<br></h2>
+
+                                                                                        <img src="img/(82).png"><br>
+
+                                                                                        <h2>Selanjutnya buka menu Filter rules pada menu Firewall. Dan tekan ”+” kemudian isi Sec. <br>
+                                                                                            Address dengan ip dari ether yang akan kalian block. Lalu buka menu advenced dan isi bagian <br>
+                                                                                            layer 7 protocol sesuai dengan nama yang kalian beri pada layer 7 protocol. Setelah itu pergi ke <br>
+                                                                                            action dan ubah menjadi ” Drop”. Tekan Apply > OK<br></h2>
+
+                                                                                            <img src="img/(83).png">
+                                                                                            <img src="img/(84).png">
+                                                                                            <img src="img/(85).png"><br>
+
+                                                                                            <h2>Sekarang mari kita cek hasilnya. <br></h2>
+
+                                                                                            <img src="img/(86).png">
+
+                                                                                            <h2>Kesimpulan<br>
+                                                                                                Block situs dengan Web Proxy dan dengan Layer 7 Protocol, hasilnya berbeda. Perbedaannya <br>
+                                                                                                jika pada Layer 7 Protocol situs yang terblock akan terlihat sepeti tidak mendapat internet sama <br>
+                                                                                                sekali, sedangkan jika menggunakan Web Proxy situs yang ter block akan langsung terlihat<br><br></h2>
+
+                                                                                                <h2>Selanjutnya kita akan mencoba konfigurasi Timer menggunakan Schedule.<br><br>
+                                                                                                    Buka menu Schedule pada System > Schedule<br></h2>
+
+                                                                                                    <img src="img/(87).png"><br>
+
+                                                                                                    <h2>Sebelum lanjut pastikan date and time sesuai. Tekan + lalu beri nama Disable Ether 2 lalu ubah <br>
+                                                                                                        start time terserah kalian/beberapa menit kedepan. Kalian juga bisa menambahkan interval. Pada <br>
+                                                                                                        kolom on event isi dengan ”interface disable ether2” perintah tersebut membuat ether 2 kalian <br>
+                                                                                                        menjadi nonaktif dan tidak bisa memberikan ip. Jadi otomatis windows kalian tidak mendapat internet.<br></h2>
+
+                                                                                                        <img src="img/(88).png"><br>
+
+                                                                                                        <h2>Tambahkan juga Timer untuk meng aktifkan ether2. Sama dengan yang sebelumnya, hanya ganti <br>
+                                                                                                            pada start timer menjadi beberapa menit kedepan dari yang sebelumnya dan pada on event <br>
+                                                                                                            menjadi ”interface enable ether2” agar saat tepat pada jam nya, ether2 yang sebelumnya non <br>
+                                                                                                            aktif menjadi aktif kembali dan windows kembali mendapat internet<br></h2>
+
+                                                                                                            <img src="img/(89).png">
+                                                                                                            <img src="img/(90).png"><br><br>
+
+                                                                                                            <h2>Hasil dari Set Timer menggunakan Schedule<br></h2>
+
+                                                                                                            <img src="img/(91).png">
+                                                                                                            <img src="img/(92).png"><br>
+                                                                                                            
+                                                                                                            <h2 style="font-size: 50px;"><<<<<<< SELESAI >>>>>>></h2>
+
+
+
+
+
+
+
+    </body>
+</html>
